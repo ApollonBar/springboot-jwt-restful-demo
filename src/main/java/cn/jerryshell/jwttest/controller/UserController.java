@@ -21,7 +21,7 @@ public class UserController {
 
     @GetMapping("/has/{username}")
     public String findUserByUsername(@PathVariable String username) {
-        User user = userDAO.findUserByUsername(username);
+        User user = userDAO.findByUsername(username);
         if (user == null) {
             return null;
         }
@@ -35,7 +35,7 @@ public class UserController {
 
     @PostMapping("/login")
     public String login(@RequestBody User user) {
-        User userFromDB = userDAO.findUserByUsernameAndPassword(user.getUsername(), user.getPassword());
+        User userFromDB = userDAO.findByUsernameAndPassword(user.getUsername(), user.getPassword());
         if (userFromDB == null) {
             return null;
         }
@@ -52,7 +52,7 @@ public class UserController {
     @PutMapping
     public User updateUser(@RequestBody User user, @RequestAttribute String username) {
         user.setUsername(username);
-        return userDAO.updateUserByUsername(user);
+        return userDAO.update(user);
     }
 
 }
