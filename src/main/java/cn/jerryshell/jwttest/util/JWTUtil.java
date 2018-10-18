@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.auth0.jwt.interfaces.Verification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -17,24 +18,20 @@ import java.util.Objects;
 public class JWTUtil {
     private static Algorithm ALGORITHM;
 
-    public static String sign(String username) {
+    public static String sign(String username, Date expiresAt, String role) {
         return JWT.create()
                 .withClaim("username", username)
+                .withExpiresAt(expiresAt)
+                .withClaim("role", role)
                 .sign(ALGORITHM);
     }
 
-    public static String signWithExpires(String username, Date expiresDate) {
-        return JWT.create()
-                .withClaim("username", username)
-                .withExpiresAt(expiresDate)
-                .sign(ALGORITHM);
-    }
-
-    public static boolean verify(String token, String username) {
+    public static boolean verify(String token, String username, String role) {
         try {
-            JWTVerifier verifier = JWT.require(ALGORITHM)
-                    .withClaim("username", username)
-                    .build();
+            Verification verification = JWT.require(ALGORITHM);
+            verification.withClaim("username", username);
+            verification.withClaim("role", role);
+            JWTVerifier verifier = verification.build();
             verifier.verify(token);
             return true;
         } catch (JWTVerificationException exception) {
@@ -46,6 +43,15 @@ public class JWTUtil {
         try {
             DecodedJWT jwt = JWT.decode(token);
             return jwt.getClaim("username").asString();
+        } catch (JWTDecodeException exception) {
+            return null;
+        }
+    }
+
+    public static String getRole(String token) {
+        try {
+            DecodedJWT jwt = JWT.decode(token);
+            return jwt.getClaim("role").asString();
         } catch (JWTDecodeException exception) {
             return null;
         }

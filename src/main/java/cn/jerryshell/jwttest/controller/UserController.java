@@ -1,13 +1,12 @@
 package cn.jerryshell.jwttest.controller;
 
+import cn.jerryshell.jwttest.annotation.RoleRequired;
 import cn.jerryshell.jwttest.annotation.TokenRequired;
 import cn.jerryshell.jwttest.dao.UserDAO;
 import cn.jerryshell.jwttest.domain.User;
 import cn.jerryshell.jwttest.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 
 @RestController
 @RequestMapping("/user")
@@ -39,13 +38,20 @@ public class UserController {
         if (userFromDB == null) {
             return null;
         }
-        return JWTUtil.signWithExpires(userFromDB.getUsername(), new Date(System.currentTimeMillis() + 10 * 1000));
+        return JWTUtil.sign(userFromDB.getUsername(), null, "admin");
     }
 
     @TokenRequired
     @GetMapping("/verify")
     public String verify(@RequestAttribute String username) {
         return "Hello " + username;
+    }
+
+    @TokenRequired
+    @RoleRequired(role = "admin")
+    @GetMapping("/admin")
+    public String admin(@RequestAttribute String username) {
+        return "Hello Admin " + username;
     }
 
     @TokenRequired
