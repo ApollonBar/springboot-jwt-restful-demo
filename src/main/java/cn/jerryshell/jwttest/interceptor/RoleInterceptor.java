@@ -17,6 +17,12 @@ public class RoleInterceptor implements HandlerInterceptor {
         }
         // 校验 role
         String role = (String) request.getAttribute("role");
-        return annotation.role().equals(role);
+        String[] roles = annotation.roles();
+        for (String s : roles) {
+            if (s.equals(role)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

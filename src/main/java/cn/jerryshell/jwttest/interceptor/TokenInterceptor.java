@@ -22,6 +22,7 @@ public class TokenInterceptor implements HandlerInterceptor {
         String role = JWTUtil.getRole(token);
         boolean verify = JWTUtil.verify(token, username, role);
         if (verify) {
+            // 验证通过，在请求域设置相应的属性
             request.setAttribute("username", username);
             request.setAttribute("role", role);
             return true;

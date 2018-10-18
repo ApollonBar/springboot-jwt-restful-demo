@@ -3,6 +3,7 @@ package cn.jerryshell.jwttest.controller;
 import cn.jerryshell.jwttest.annotation.RoleRequired;
 import cn.jerryshell.jwttest.annotation.TokenRequired;
 import cn.jerryshell.jwttest.dao.UserDAO;
+import cn.jerryshell.jwttest.domain.Role;
 import cn.jerryshell.jwttest.domain.User;
 import cn.jerryshell.jwttest.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class UserController {
         if (userFromDB == null) {
             return null;
         }
-        return JWTUtil.sign(userFromDB.getUsername(), null, "admin");
+        return JWTUtil.sign(userFromDB.getUsername(), null, Role.ADMINISTRATOR);
     }
 
     @TokenRequired
@@ -48,7 +49,14 @@ public class UserController {
     }
 
     @TokenRequired
-    @RoleRequired(role = "admin")
+    @RoleRequired(roles = {Role.VIP, Role.ADMINISTRATOR})
+    @GetMapping("/vip")
+    public String vip(@RequestAttribute String username) {
+        return "Hello VIP " + username;
+    }
+
+    @TokenRequired
+    @RoleRequired(roles = Role.ADMINISTRATOR)
     @GetMapping("/admin")
     public String admin(@RequestAttribute String username) {
         return "Hello Admin " + username;
