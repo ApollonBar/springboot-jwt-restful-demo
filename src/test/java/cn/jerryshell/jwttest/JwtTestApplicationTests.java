@@ -12,8 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -43,7 +42,8 @@ public class JwtTestApplicationTests {
         mockMvc.perform(post("/user").contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonObject.toString()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().json(jsonObject.toString()));
+                .andExpect(jsonPath("username").value(jsonObject.get("username")))
+                .andExpect(jsonPath("password").value(jsonObject.get("password")));
 
         mockMvc.perform(get("/user/has/mockUsername"))
                 .andExpect(status().isOk())
@@ -80,7 +80,7 @@ public class JwtTestApplicationTests {
         mockMvc.perform(put("/user").header("Authorization", token).contentType(MediaType.APPLICATION_JSON_UTF8).content(jsonObject.toString()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().json(jsonObject.toString()))
+                .andExpect(jsonPath("password").value("updateUserPassword"))
                 .andDo(print());
     }
 
