@@ -39,27 +39,27 @@ public class UserController {
         if (userFromDB == null) {
             return null;
         }
-        return JWTUtil.sign(userFromDB.getUsername(), null, Role.ADMINISTRATOR);
+        return JWTUtil.sign(userFromDB.getUsername(), null, userFromDB.getRole());
     }
 
     @TokenRequired
     @GetMapping("/verify")
-    public String verify(@RequestAttribute String username) {
-        return "Hello " + username;
+    public User verify(@RequestAttribute String username) {
+        return userDAO.findByUsername(username);
     }
 
     @TokenRequired
     @RoleRequired(roles = {Role.VIP, Role.ADMINISTRATOR})
     @GetMapping("/vip")
-    public String vip(@RequestAttribute String username) {
-        return "Hello VIP " + username;
+    public User vip(@RequestAttribute String username) {
+        return userDAO.findByUsername(username);
     }
 
     @TokenRequired
     @RoleRequired(roles = Role.ADMINISTRATOR)
     @GetMapping("/admin")
-    public String admin(@RequestAttribute String username) {
-        return "Hello Admin " + username;
+    public User admin(@RequestAttribute String username) {
+        return userDAO.findByUsername(username);
     }
 
     @TokenRequired

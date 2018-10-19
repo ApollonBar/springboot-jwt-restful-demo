@@ -1,5 +1,6 @@
 package cn.jerryshell.jwttest.dao;
 
+import cn.jerryshell.jwttest.domain.Role;
 import cn.jerryshell.jwttest.domain.User;
 import org.springframework.stereotype.Component;
 
@@ -10,11 +11,28 @@ import java.util.Map;
 public class UserDAO {
     private static Map<String, User> datasource = new HashMap<>();
 
+    // 初始化用户数据
     static {
+        User jerry = new User();
+        jerry.setUsername("jerry");
+        jerry.setPassword("123");
+        jerry.setEmail("jerry@email.com");
+        jerry.setRole(Role.ADMINISTRATOR);
+
+        User vip = new User();
+        vip.setUsername("vip");
+        vip.setPassword("456");
+        vip.setEmail("vip@email.com");
+        vip.setRole(Role.VIP);
+
         User user = new User();
-        user.setUsername("jerry");
-        user.setPassword("123");
-        user.setEmail("email@123.com");
+        user.setUsername("user");
+        user.setPassword("789");
+        user.setEmail("user@email.com");
+        user.setRole(Role.USER);
+
+        datasource.put(jerry.getUsername(), jerry);
+        datasource.put(vip.getUsername(), vip);
         datasource.put(user.getUsername(), user);
     }
 
