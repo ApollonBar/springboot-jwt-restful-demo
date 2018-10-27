@@ -45,7 +45,7 @@ public class AuthController {
         user.setUsername(username);
         user.setPassword(password);
         user.setEmail(email);
-        user.setRole(Role.USER);
+        user.setRole(Role.ROLE_USER);
         return userDAO.save(user);
     }
 

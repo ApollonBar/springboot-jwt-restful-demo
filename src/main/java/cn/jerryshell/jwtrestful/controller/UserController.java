@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @TokenRequired
-    @RoleRequired(roles = {Role.VIP, Role.ADMINISTRATOR})
+    @RoleRequired(roles = {Role.ROLE_VIP, Role.ROLE_ADMIN})
     @GetMapping("/vip")
     public User vip(@RequestAttribute String username) {
         return userDAO.findByUsername(username)
@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @TokenRequired
-    @RoleRequired(roles = Role.ADMINISTRATOR)
+    @RoleRequired(roles = Role.ROLE_ADMIN)
     @GetMapping("/admin")
     public User admin(@RequestAttribute String username) {
         return userDAO.findByUsername(username)

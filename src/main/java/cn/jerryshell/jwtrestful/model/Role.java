@@ -1,8 +1,7 @@
 package cn.jerryshell.jwtrestful.model;
 
 public class Role {
-    public static final String GUEST = "guest";
-    public static final String USER = "user";
-    public static final String VIP = "vip";
-    public static final String ADMINISTRATOR = "administrator";
+    public static final String ROLE_USER = "ROLE_USER";
+    public static final String ROLE_VIP = "ROLE_VIP";
+    public static final String ROLE_ADMIN = "ROLE_ADMIN";
 }

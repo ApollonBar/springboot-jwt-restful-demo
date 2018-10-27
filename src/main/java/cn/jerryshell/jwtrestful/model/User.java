@@ -17,7 +17,7 @@ public class User {
     private Long id;
 
     @NotBlank
-    @Size(max = 40)
+    @Size(max = 16)
     @Column(unique = true)
     private String username;
 
@@ -26,11 +26,11 @@ public class User {
     private String password;
 
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 64)
     @Email
     private String email;
 
     @NotBlank
-    @Size(max = 50)
+    @Size(max = 32)
     private String role;
 }
