@@ -1,4 +1,4 @@
-package cn.jerryshell.jwttest;
+package cn.jerryshell.jwttest.config;
 
 import cn.jerryshell.jwttest.interceptor.RoleInterceptor;
 import cn.jerryshell.jwttest.interceptor.TokenInterceptor;

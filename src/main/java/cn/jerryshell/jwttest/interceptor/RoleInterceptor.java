@@ -10,11 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 public class RoleInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        // 判断 handler 是否有 RoleRequired 注解，如果没有则拦截器直接放行
-        RoleRequired annotation = ((HandlerMethod) handler).getMethodAnnotation(RoleRequired.class);
+        // 如果 handler 不是 HandlerMethod 实例直接放行
+        if (!(handler instanceof HandlerMethod)) {
+            return true;
+        }
+
+        // 如果 handler 没有 RoleRequired 注解直接放行
+        HandlerMethod handlerMethod = (HandlerMethod) handler;
+        RoleRequired annotation = handlerMethod.getMethodAnnotation(RoleRequired.class);
         if (annotation == null) {
             return true;
         }
+
         // 校验 role
         String role = (String) request.getAttribute("role");
         String[] roles = annotation.roles();

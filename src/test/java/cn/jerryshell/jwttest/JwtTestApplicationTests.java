@@ -24,7 +24,7 @@ public class JwtTestApplicationTests {
 
     @Test
     public void findUserByUsernameTest() throws Exception {
-        mockMvc.perform(get("/user/has/jerry"))
+        mockMvc.perform(get("/user/has/admin"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("yes"));
 
