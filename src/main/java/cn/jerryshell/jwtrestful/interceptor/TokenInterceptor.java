@@ -25,7 +25,7 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         // 校验 token
         String token = request.getHeader("Authorization");
-        if (JWTUtil.verify(token)) {
+        if (!JWTUtil.verify(token)) {
             return false;
         }
 
