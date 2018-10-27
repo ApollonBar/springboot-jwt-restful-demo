@@ -1,17 +1,18 @@
-package cn.jerryshell.jwtrestful.model;
+package cn.jerryshell.jwtrestful.payload;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Getter
 @Setter
-public class UserInfoUpdateForm {
+public class RegisterForm extends LoginForm {
     @NotBlank
-    @Size(max = 100)
+    private String password2;
+
+    @NotBlank
     @Email
     private String email;
 }

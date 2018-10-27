@@ -1,4 +1,4 @@
-package cn.jerryshell.jwtrestful.model;
+package cn.jerryshell.jwtrestful.payload;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -6,8 +6,8 @@ import cn.jerryshell.jwtrestful.dao.UserDAO;
 import cn.jerryshell.jwtrestful.exception.ResourceNotFoundException;
 import cn.jerryshell.jwtrestful.model.Role;
 import cn.jerryshell.jwtrestful.model.User;
-import cn.jerryshell.jwtrestful.model.UserInfoUpdateForm;
-import cn.jerryshell.jwtrestful.model.UserPasswordUpdateForm;
+import cn.jerryshell.jwtrestful.payload.UserInfoUpdateForm;
+import cn.jerryshell.jwtrestful.payload.UserPasswordUpdateForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
