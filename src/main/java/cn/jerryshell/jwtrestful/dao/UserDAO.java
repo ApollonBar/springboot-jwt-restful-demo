@@ -1,6 +1,6 @@
-package cn.jerryshell.jwttest.dao;
+package cn.jerryshell.jwtrestful.dao;
 
-import cn.jerryshell.jwttest.domain.User;
+import cn.jerryshell.jwtrestful.domain.User;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;

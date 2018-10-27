@@ -1,4 +1,4 @@
-package cn.jerryshell.jwttest.util;
+package cn.jerryshell.jwtrestful.util;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;

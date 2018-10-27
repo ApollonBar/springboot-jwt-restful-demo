@@ -1,6 +1,6 @@
-package cn.jerryshell.jwttest.interceptor;
+package cn.jerryshell.jwtrestful.interceptor;
 
-import cn.jerryshell.jwttest.annotation.RoleRequired;
+import cn.jerryshell.jwtrestful.annotation.RoleRequired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 

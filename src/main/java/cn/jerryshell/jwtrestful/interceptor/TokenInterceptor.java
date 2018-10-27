@@ -1,7 +1,7 @@
-package cn.jerryshell.jwttest.interceptor;
+package cn.jerryshell.jwtrestful.interceptor;
 
-import cn.jerryshell.jwttest.annotation.TokenRequired;
-import cn.jerryshell.jwttest.util.JWTUtil;
+import cn.jerryshell.jwtrestful.annotation.TokenRequired;
+import cn.jerryshell.jwtrestful.util.JWTUtil;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 

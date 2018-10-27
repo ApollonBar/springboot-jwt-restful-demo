@@ -1,15 +1,15 @@
-package cn.jerryshell.jwttest;
+package cn.jerryshell.jwtrestful;
 
-import cn.jerryshell.jwttest.dao.UserDAO;
-import cn.jerryshell.jwttest.domain.Role;
-import cn.jerryshell.jwttest.domain.User;
+import cn.jerryshell.jwtrestful.dao.UserDAO;
+import cn.jerryshell.jwtrestful.domain.Role;
+import cn.jerryshell.jwtrestful.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JwtTestApplication implements CommandLineRunner {
+public class JwtRestfulApplication implements CommandLineRunner {
 
     private UserDAO userDAO;
 
@@ -19,7 +19,7 @@ public class JwtTestApplication implements CommandLineRunner {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(JwtTestApplication.class, args);
+        SpringApplication.run(JwtRestfulApplication.class, args);
     }
 
     @Override

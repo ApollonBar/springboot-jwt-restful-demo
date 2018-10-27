@@ -1,4 +1,4 @@
-package cn.jerryshell.jwttest;
+package cn.jerryshell.jwtrestful;
 
 import org.json.JSONObject;
 import org.junit.Test;
@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class JwtTestApplicationTests {
+public class JwtRestfulApplicationTests {
 
     @Autowired
     private MockMvc mockMvc;

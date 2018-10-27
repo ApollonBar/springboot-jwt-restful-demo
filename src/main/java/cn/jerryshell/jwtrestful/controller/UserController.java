@@ -1,11 +1,11 @@
-package cn.jerryshell.jwttest.controller;
+package cn.jerryshell.jwtrestful.controller;
 
-import cn.jerryshell.jwttest.annotation.RoleRequired;
-import cn.jerryshell.jwttest.annotation.TokenRequired;
-import cn.jerryshell.jwttest.dao.UserDAO;
-import cn.jerryshell.jwttest.domain.Role;
-import cn.jerryshell.jwttest.domain.User;
-import cn.jerryshell.jwttest.util.JWTUtil;
+import cn.jerryshell.jwtrestful.annotation.RoleRequired;
+import cn.jerryshell.jwtrestful.annotation.TokenRequired;
+import cn.jerryshell.jwtrestful.dao.UserDAO;
+import cn.jerryshell.jwtrestful.domain.Role;
+import cn.jerryshell.jwtrestful.domain.User;
+import cn.jerryshell.jwtrestful.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

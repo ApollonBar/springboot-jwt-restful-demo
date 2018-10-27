@@ -1,4 +1,4 @@
-package cn.jerryshell.jwttest.domain;
+package cn.jerryshell.jwtrestful.domain;
 
 public class Role {
     public static final String GUEST = "guest";
