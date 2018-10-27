@@ -1,7 +1,6 @@
 package cn.jerryshell.jwtrestful.util;
 
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
@@ -26,13 +25,10 @@ public class JWTUtil {
                 .sign(ALGORITHM);
     }
 
-    public static boolean verify(String token, String username, String role) {
+    public static boolean verify(String token) {
         try {
             Verification verification = JWT.require(ALGORITHM);
-            verification.withClaim("username", username);
-            verification.withClaim("role", role);
-            JWTVerifier verifier = verification.build();
-            verifier.verify(token);
+            verification.build().verify(token);
             return true;
         } catch (JWTVerificationException exception) {
             return false;

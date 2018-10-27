@@ -25,14 +25,13 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         // 校验 token
         String token = request.getHeader("Authorization");
-        String username = JWTUtil.getUsername(token);
-        String role = JWTUtil.getRole(token);
-        boolean verify = JWTUtil.verify(token, username, role);
-        if (!verify) {
+        if (JWTUtil.verify(token)) {
             return false;
         }
 
         // 验证通过，在请求域设置相应的属性
+        String username = JWTUtil.getUsername(token);
+        String role = JWTUtil.getRole(token);
         request.setAttribute("username", username);
         request.setAttribute("role", role);
         return true;
