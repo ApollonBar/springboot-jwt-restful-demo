@@ -20,7 +20,7 @@ public class AuthController {
 
     @PostMapping("register")
     public User register(@RequestBody User user) {
-        return userDAO.create(user);
+        return userDAO.save(user);
     }
 
     @PostMapping("/login")

@@ -13,13 +13,13 @@ public class JwtRestfulApplication implements CommandLineRunner {
 
     private UserDAO userDAO;
 
+    public static void main(String[] args) {
+        SpringApplication.run(JwtRestfulApplication.class, args);
+    }
+
     @Autowired
     public void setUserDAO(UserDAO userDAO) {
         this.userDAO = userDAO;
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(JwtRestfulApplication.class, args);
     }
 
     @Override
@@ -43,8 +43,8 @@ public class JwtRestfulApplication implements CommandLineRunner {
         user.setEmail("user@email.com");
         user.setRole(Role.USER);
 
-        userDAO.create(admin);
-        userDAO.create(vip);
-        userDAO.create(user);
+        userDAO.save(admin);
+        userDAO.save(vip);
+        userDAO.save(user);
     }
 }

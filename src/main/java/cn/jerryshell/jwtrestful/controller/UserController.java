@@ -45,7 +45,7 @@ public class UserController {
     @PutMapping
     public User updateUser(@RequestBody User user, @RequestAttribute String username) {
         user.setUsername(username);
-        return userDAO.update(user);
+        return userDAO.save(user);
     }
 
 }
