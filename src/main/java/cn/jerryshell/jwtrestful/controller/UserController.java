@@ -6,8 +6,12 @@ import cn.jerryshell.jwtrestful.dao.UserDAO;
 import cn.jerryshell.jwtrestful.exception.ResourceNotFoundException;
 import cn.jerryshell.jwtrestful.model.Role;
 import cn.jerryshell.jwtrestful.model.User;
+import cn.jerryshell.jwtrestful.model.UserInfoUpdateForm;
+import cn.jerryshell.jwtrestful.model.UserPasswordUpdateForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/users")
@@ -43,8 +47,19 @@ public class UserController {
 
     @TokenRequired
     @PutMapping
-    public User updateUser(@RequestBody User user, @RequestAttribute String username) {
-        user.setUsername(username);
+    public User updateUserInfo(@Valid @RequestBody UserInfoUpdateForm userInfoUpdateForm, @RequestAttribute String username) {
+        User user = userDAO.findByUsername(username)
+                .orElseThrow(() -> ResourceNotFoundException.build("User", "Username", username));
+        user.setEmail(userInfoUpdateForm.getEmail());
+        return userDAO.save(user);
+    }
+
+    @TokenRequired
+    @PutMapping("/password")
+    public User updateUserPassword(@Valid @RequestBody UserPasswordUpdateForm userPasswordUpdateForm, @RequestAttribute String username) {
+        User user = userDAO.findByUsername(username)
+                .orElseThrow(() -> ResourceNotFoundException.build("User", "Username", username));
+        user.setPassword(userPasswordUpdateForm.getPassword());
         return userDAO.save(user);
     }
 
