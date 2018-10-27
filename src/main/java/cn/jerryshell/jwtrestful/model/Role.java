@@ -1,4 +1,4 @@
-package cn.jerryshell.jwtrestful.domain;
+package cn.jerryshell.jwtrestful.model;
 
 public class Role {
     public static final String GUEST = "guest";

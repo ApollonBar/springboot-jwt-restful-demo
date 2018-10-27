@@ -1,8 +1,8 @@
 package cn.jerryshell.jwtrestful;
 
 import cn.jerryshell.jwtrestful.dao.UserDAO;
-import cn.jerryshell.jwtrestful.domain.Role;
-import cn.jerryshell.jwtrestful.domain.User;
+import cn.jerryshell.jwtrestful.model.Role;
+import cn.jerryshell.jwtrestful.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

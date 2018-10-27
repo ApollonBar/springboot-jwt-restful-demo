@@ -1,4 +1,4 @@
-package cn.jerryshell.jwtrestful.domain;
+package cn.jerryshell.jwtrestful.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -16,16 +17,20 @@ public class User {
     private Long id;
 
     @NotBlank
+    @Size(max = 40)
     @Column(unique = true)
     private String username;
 
     @NotBlank
+    @Size(max = 128)
     private String password;
 
     @NotBlank
+    @Size(max = 100)
     @Email
     private String email;
 
     @NotBlank
+    @Size(max = 50)
     private String role;
 }

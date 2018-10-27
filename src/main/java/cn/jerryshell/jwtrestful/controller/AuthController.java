@@ -2,8 +2,8 @@ package cn.jerryshell.jwtrestful.controller;
 
 import cn.jerryshell.jwtrestful.annotation.TokenRequired;
 import cn.jerryshell.jwtrestful.dao.UserDAO;
-import cn.jerryshell.jwtrestful.domain.User;
 import cn.jerryshell.jwtrestful.exception.ResourceNotFoundException;
+import cn.jerryshell.jwtrestful.model.User;
 import cn.jerryshell.jwtrestful.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
