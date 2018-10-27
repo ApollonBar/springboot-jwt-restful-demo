@@ -5,12 +5,12 @@ import cn.jerryshell.jwtrestful.annotation.TokenRequired;
 import cn.jerryshell.jwtrestful.dao.UserDAO;
 import cn.jerryshell.jwtrestful.domain.Role;
 import cn.jerryshell.jwtrestful.domain.User;
-import cn.jerryshell.jwtrestful.util.JWTUtil;
+import cn.jerryshell.jwtrestful.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
     private UserDAO userDAO;
 
@@ -19,47 +19,26 @@ public class UserController {
         this.userDAO = userDAO;
     }
 
-    @GetMapping("/has/{username}")
-    public String findUserByUsername(@PathVariable String username) {
-        User user = userDAO.findByUsername(username);
-        if (user == null) {
-            return null;
-        }
-        return "yes";
-    }
-
-    @PostMapping
-    public User register(@RequestBody User user) {
-        return userDAO.create(user);
-    }
-
-    @PostMapping("/login")
-    public String login(@RequestBody User user) {
-        User userFromDB = userDAO.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-        if (userFromDB == null) {
-            return null;
-        }
-        return JWTUtil.sign(userFromDB.getUsername(), null, userFromDB.getRole());
-    }
-
-    @TokenRequired
-    @GetMapping("/verify")
-    public User verify(@RequestAttribute String username) {
-        return userDAO.findByUsername(username);
+    @GetMapping("/username/{username}")
+    public User findUserByUsername(@PathVariable String username) {
+        return userDAO.findByUsername(username)
+                .orElseThrow(() -> ResourceNotFoundException.build("User", "Username", username));
     }
 
     @TokenRequired
     @RoleRequired(roles = {Role.VIP, Role.ADMINISTRATOR})
     @GetMapping("/vip")
     public User vip(@RequestAttribute String username) {
-        return userDAO.findByUsername(username);
+        return userDAO.findByUsername(username)
+                .orElseThrow(() -> ResourceNotFoundException.build("User", "Username", username));
     }
 
     @TokenRequired
     @RoleRequired(roles = Role.ADMINISTRATOR)
     @GetMapping("/admin")
     public User admin(@RequestAttribute String username) {
-        return userDAO.findByUsername(username);
+        return userDAO.findByUsername(username)
+                .orElseThrow(() -> ResourceNotFoundException.build("User", "Username", username));
     }
 
     @TokenRequired
