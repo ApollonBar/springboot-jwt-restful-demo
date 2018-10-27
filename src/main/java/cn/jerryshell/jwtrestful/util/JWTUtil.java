@@ -4,8 +4,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import com.auth0.jwt.interfaces.Verification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -27,8 +25,7 @@ public class JWTUtil {
 
     public static boolean verify(String token) {
         try {
-            Verification verification = JWT.require(ALGORITHM);
-            verification.build().verify(token);
+            JWT.require(ALGORITHM).build().verify(token);
             return true;
         } catch (JWTVerificationException exception) {
             return false;
@@ -37,8 +34,7 @@ public class JWTUtil {
 
     public static String getUsername(String token) {
         try {
-            DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim("username").asString();
+            return JWT.decode(token).getClaim("username").asString();
         } catch (JWTDecodeException exception) {
             return null;
         }
@@ -46,8 +42,7 @@ public class JWTUtil {
 
     public static String getRole(String token) {
         try {
-            DecodedJWT jwt = JWT.decode(token);
-            return jwt.getClaim("role").asString();
+            return JWT.decode(token).getClaim("role").asString();
         } catch (JWTDecodeException exception) {
             return null;
         }

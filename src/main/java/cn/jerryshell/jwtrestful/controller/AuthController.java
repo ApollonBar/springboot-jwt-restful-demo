@@ -32,10 +32,12 @@ public class AuthController {
         if (!password.equals(password2)) {
             throw new RuntimeException("注册失败，密码和确认密码不符");
         }
+
         @NotBlank String username = registerForm.getUsername();
         if (userDAO.existsByUsername(username)) {
             throw new RuntimeException("注册失败，用户名已经存在");
         }
+
         @NotBlank @Email String email = registerForm.getEmail();
         if (userDAO.existsByEmail(email)) {
             throw new RuntimeException("注册失败，邮箱已经被使用");

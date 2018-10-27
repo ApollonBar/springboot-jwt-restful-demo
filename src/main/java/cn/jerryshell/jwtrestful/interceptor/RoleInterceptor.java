@@ -23,10 +23,10 @@ public class RoleInterceptor implements HandlerInterceptor {
         }
 
         // 校验 role
-        String role = (String) request.getAttribute("role");
-        String[] roles = annotation.roles();
-        for (String s : roles) {
-            if (s.equals(role)) {
+        String requestRole = (String) request.getAttribute("role");
+        String[] requiredRoles = annotation.roles();
+        for (String role : requiredRoles) {
+            if (requestRole.equals(role)) {
                 return true;
             }
         }

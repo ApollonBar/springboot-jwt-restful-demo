@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @Setter
 public class UserInfoUpdateForm {
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 64)
     @Email
     private String email;
 }
