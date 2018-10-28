@@ -1,10 +1,6 @@
 package cn.jerryshell.jwtrestful;
 
-import cn.jerryshell.jwtrestful.dao.UserDAO;
-import cn.jerryshell.jwtrestful.model.Role;
-import cn.jerryshell.jwtrestful.model.User;
 import org.json.JSONObject;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,35 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class JwtRestfulApplicationTests {
 
     @Autowired
-    private UserDAO userDAO;
-
-    @Autowired
     private MockMvc mockMvc;
-
-    @Before
-    public void initUserData() {
-        User admin = new User();
-        admin.setUsername("admin");
-        admin.setPassword("123");
-        admin.setEmail("admin@email.com");
-        admin.setRole(Role.ROLE_ADMIN);
-
-        User vip = new User();
-        vip.setUsername("vip");
-        vip.setPassword("456");
-        vip.setEmail("vip@email.com");
-        vip.setRole(Role.ROLE_VIP);
-
-        User user = new User();
-        user.setUsername("user");
-        user.setPassword("789");
-        user.setEmail("user@email.com");
-        user.setRole(Role.ROLE_USER);
-
-        userDAO.save(admin);
-        userDAO.save(vip);
-        userDAO.save(user);
-    }
 
     @Test
     public void findUserByUsernameTest() throws Exception {
