@@ -24,6 +24,9 @@ public class JWTUtil {
     }
 
     public static boolean verify(String token) {
+        if (token == null || token.trim().isEmpty()) {
+            return false;
+        }
         try {
             JWT.require(ALGORITHM).build().verify(token);
             return true;
